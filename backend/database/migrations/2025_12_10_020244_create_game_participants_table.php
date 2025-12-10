@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('game_participants', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('game_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->decimal('score', 10, 2)->default(0);
+            $table->integer('rank')->nullable();
+            $table->decimal('prize_amount', 20, 8)->default(0);
+            $table->integer('correct_answers')->default(0);
+            $table->float('avg_response_time')->default(0);
+            $table->timestamp('joined_at')->useCurrent();
+            $table->timestamps();
+            
+            $table->unique(['game_id', 'user_id']);
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('game_participants');
+    }
+};
