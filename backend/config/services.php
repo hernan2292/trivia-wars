@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'worldcoin' => [
+        'app_id' => env('WORLD_APP_ID'),
+        'mock_verify' => env('WORLD_MOCK_VERIFY', false),
+    ],
+
 ];

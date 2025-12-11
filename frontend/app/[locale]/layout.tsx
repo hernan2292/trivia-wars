@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
+import MiniKitProvider from '@/components/MiniKitProvider';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +36,9 @@ export default async function LocaleLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <MiniKitProvider>
+            {children}
+          </MiniKitProvider>
         </NextIntlClientProvider>
       </body>
     </html>
